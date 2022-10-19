@@ -853,7 +853,7 @@ func (s Service) AuthorizeSession(ctx context.Context, req *pbs.AuthorizeSession
 		if err != nil {
 			return nil, errors.Wrap(ctx, err, op)
 		}
-		dynamic, err = credRepo.Issue(ctx, sess.GetPublicId(), vaultReqs)
+		dynamic, err = credRepo.Issue(ctx, sess.GetPublicId(), vaultReqs, credential.WithUserId(authResults.UserId), credential.WithIamRepoFn(s.iamRepoFn))
 		if err != nil {
 			return nil, errors.Wrap(ctx, err, op)
 		}
